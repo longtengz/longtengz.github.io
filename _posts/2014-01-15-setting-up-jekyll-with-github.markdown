@@ -17,7 +17,7 @@ I'm not expert and only 3-days after learning something, so to take some notes, 
 Jekyll
 ---------
 
-Because Jekyll is bundled as a ruby gem, you have to use `gem install jekyll`. Some of you might not be familiar with `gem`, it's a package manager for ruby. To use a gem, go to [RubyGems][rubygems], download it from source. Unzip that zip file, `cd` into that unzipped directory, and 
+Because Jekyll is bundled as a ruby gem, you have to use `gem install jekyll`. Some of you might not be familiar with `gem`, it's a package manager for ruby. To use gem, go to [RubyGems][rubygems], download it from source. Unzip that zip file, `cd` into that unzipped directory, and 
 
 	cd zipfile 	
 	# or whatever compressed file you just uncompressed
