@@ -3,7 +3,7 @@ layout: post
 title: "Setting up Jekyll with GitHub"
 date: 2014-01-15 22:28:50
 categories: website
-tages: Jekyll GitHub git ruby rvm gem
+tags: Jekyll GitHub git ruby rvm gem
 ---
 
 You can use GitHub to host your personal blog for you, and simply blog with Jekyll.
