@@ -1,0 +1,51 @@
+{% assign latest_post = site.posts.first %}
+
+<div class="page-header">
+  <h1>{{ latest_post.title }} {% if latest_post.tagline %}<small>{{latest_post.tagline}}</small>{% endif %}</h1>
+</div>
+
+<div class="row-fluid post-full">
+  <div class="span12">
+    <div class="date">
+      <span>{{ latest_post.date | date_to_long_string }}</span>
+    </div>
+    <div class="content">
+      {{ latest_post.content }}
+    </div>
+
+  {% unless latest_post.categories == empty %}
+    <ul class="tag_box inline">
+      <li><i class="icon-folder-open"></i></li>
+      {% assign categories_list = latest_post.categories %}
+      {% include JB/categories_list %}
+    </ul>
+  {% endunless %}  
+
+  {% unless latest_post.tags == empty %}
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      {% assign tags_list = latest_post.tags %}
+      {% include JB/tags_list %}
+    </ul>
+  {% endunless %}  
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      {% if latest_post.previous %}
+        <li class="prev"><a href="{{ BASE_PATH }}{{ latest_post.previous.url }}" title="{{ latest_post.previous.title }}">&larr; Previous</a></li>
+      {% else %}
+        <li class="prev disabled"><a>&larr; Previous</a></li>
+      {% endif %}
+        <li><a href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Archive</a></li>
+      {% if latest_post.next %}
+        <li class="next"><a href="{{ BASE_PATH }}{{ latest_post.next.url }}" title="{{ latest_post.next.title }}">Next &rarr;</a></li>
+      {% else %}
+        <li class="next disabled"><a>Next &rarr;</a>
+      {% endif %}
+      </ul>
+    </div>
+    <hr>
+    {% include JB/comments %}
+  </div>
+</div>
