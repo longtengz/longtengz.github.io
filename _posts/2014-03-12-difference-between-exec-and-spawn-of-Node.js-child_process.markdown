@@ -19,7 +19,7 @@ exec()
 
 child_process.exec(command, [options], callback)
 
-{% highlight javascript %}	
+{% highlight JavaScript %}	
 	normalizeExecArgs():
 
 	  if (process.platform === 'win32') {
@@ -51,9 +51,11 @@ You can check out what does `cmd /c` means by typing `cmd /?` in cmd:
 
 As for Linux, you can run the following:
 
-	$ ps
-	$ /bin/sh -c ls
-	$ ps
+{% highlight bash %}
+$ ps
+$ /bin/sh -c ls
+$ ps
+{% endhighlight %}
 
 and see whether another process has showed up. Obviously no new process will show up, because when `sh -c ls` finished executing `ls`,it stops and terminates.
 
@@ -66,11 +68,12 @@ child_process.spawn(command, [args], [options])
 
 // the first argument **command** should be named **file** as this is a bit confusing in Node documentation.
 	
-	normalizeSpawnArguments(/*file, args, options*/):
-		// when this normalized arguments child_process.spawn() takes in, 
-		// the *file* argument is never normalized
-		// and the *file* is not normalized as that in the arguemnts of exec()
-
+{% highlight javascript %}
+normalizeSpawnArguments(/*file, args, options*/):
+    // when this normalized arguments child_process.spawn() takes in, 
+    // the *file* argument is never normalized
+    // and the *file* is not normalized as that in the arguemnts of exec()
+{% endhighlight %}
 
 So it's quite clear now, the so-called **command** argument isn't exactly command but rather a file name that will be excuted alone as a child process. `cmd.exe` or `/bin/sh` is just one of many child processes that can be executed.
 
