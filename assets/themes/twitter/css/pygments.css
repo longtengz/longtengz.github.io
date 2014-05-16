@@ -79,3 +79,7 @@
     background: #202020;
     color: #d0d0d0;
 }
+
+span.lineno {
+    color: #8B4513;
+}
