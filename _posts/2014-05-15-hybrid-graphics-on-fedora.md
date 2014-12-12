@@ -3,7 +3,7 @@ layout: post
 title: "Disable discrete VGA on Fedora 20 while radeon and fglrx are both not working"
 date: 2014-05-15 21:56:40
 categories: linux
-tags: hardware VGA 
+tags: hardware VGA
 ---
 
 I just migrated to Fedora 20 only out of pure love for its slick UI. When I first installed Fedora 15, I had this annoying VGA cooler that spinned like crazy and consumed a great portion of power that drained my battery pretty fast. I have a Dell, and it has dual graphics cards, one discrete and the other integrated. After a bit of search, I think I solved the problem by installing the **propriety** AMD Catalyst Driver **fglrx** and succeeded using the hybrid graphics cards alternatively. 
@@ -13,14 +13,14 @@ But this time, Fedora 20 is quite new, and the latest propriety driver is not up
 
 You can use the following command to check whether the Fedora installation has detected your discrete VGA card and installed the **radeon** for you automatically.
 
-{% highlight bash linenos %}
+{% highlight bash %}
 lsmod | grep radeon
 # lsmod - Show the status of modules in Linux Kernel
 {% endhighlight %}
 
 By checking the PCI devices that are currently connected,
 
-{% highlight bash linenos %}
+{% highlight bash %}
 # list all PCI devices
 lspci -v | less
 # search '/VGA'
@@ -33,7 +33,7 @@ I see two graphics cards turned on, but only the integrated one with the tag `[V
 
 I found a solution on [wiki archlinux][archlinux], and it elaborates quite well on related topics:
 
-{% highlight bash linenos %}
+{% highlight bash %}
 echo OFF > /sys/kernel/debug/vgaswitcheroo/switch
 # turns off the discrete GPU
 {% endhighlight %}

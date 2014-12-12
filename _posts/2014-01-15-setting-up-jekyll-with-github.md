@@ -19,7 +19,7 @@ Jekyll
 
 Because Jekyll is bundled as a ruby gem, you have to use `gem install jekyll`. Some of you might not be familiar with `gem`, it's a package manager for ruby. To use gem, go to [RubyGems][rubygems], download it from source. Unzip that zip file, `cd` into that unzipped directory, and 
 
-{% highlight bash linenos %}
+{% highlight bash %}
 cd zipfile 	
 # or whatever compressed file you just uncompressed
 
@@ -29,7 +29,7 @@ ruby setup.rb
 
 Then you just installed RubyGems. And there is always an easy way to install it using *yum*, *apt-get*.
 
-{% highlight bash linenos %}
+{% highlight bash %}
 # if you are using apt-get on Ubuntu
 sudo apt-get install rubygems
 
@@ -41,7 +41,7 @@ That's the case if you already have ruby. But for me, I then have ruby v1.8.~ wh
 
 After successfully installing *rvm*, we can then install a new version of *ruby* and delete the older version of that.
 
-{% highlight bash linenos %}
+{% highlight bash %}
 rvm install 2.1.0
 rvm list 
 rvm use 2.1.0 --default
@@ -52,13 +52,13 @@ Solutions found in [here][rvmNotAFunction]
 
 If you're under Bash shell, do the following:
 
-{% highlight bash linenos %}
+{% highlight bash %}
 /bin/bash --login
 {% endhighlight %}
 	
 then change your ruby version again:
 
-{% highlight bash linenos %}
+{% highlight bash %}
 rvm use 2.1.0 --default
 
 rvm remove older-version-of-ruby 
@@ -69,7 +69,7 @@ Then you are ready to install *RubyGems* with `ruby setup.rb`, and then *Jekyll*
 
 After you've installed Jekyll, you're only one step away from your mini site.
 
-{% highlight bash linenos %}
+{% highlight bash %}
 jekyll new your-site-name
 cd your-site-name
 jekyll serve
@@ -82,7 +82,7 @@ git & GitHub
 -------
 If you ever want to freely host your website somewhere, I'd say the combination of Jekyll, git and GitHub is definitely the choice. According to [JekyllBootstrap][jekyllbootstrap] and [GitHub Pages][github-pages], GitHub will only run your code as a website if you specify your repo to be **username.github.io**. In that case, you'd better 
 
-{% highlight bash linenos %}
+{% highlight bash %}
 jekyll new username.github.io
 {% endhighlight %}
 
@@ -90,7 +90,7 @@ since you'll need that directory in a minute.
 
 After the Jekyll part, while you are still in that root directory of your site, run the following:
 
-{% highlight bash linenos %}
+{% highlight bash %}
 git init
 git add .
 git commit -m 'Initial commit'
@@ -99,7 +99,7 @@ git commit -m 'Initial commit'
 And then you go to your [GitHub][github] homepage, and create a new repo named **username.github.io**, and then hit *create*.
 Again in command line:
 	
-{% highlight bash linenos %}
+{% highlight bash %}
 git remote add origin git@github.com:username/username.github.io.git
 git push origin master
 {% endhighlight %}

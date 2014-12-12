@@ -6,7 +6,7 @@ categories: nodejs
 tags: node child process exec spawn IO stdout stderr Windows cmd 
 ---
 
-Currently I am making an application that counts the total number of people in a classroom for teachers who don't want to waste their time on a roll call. My partner needs to invoke some Matlab-implemented algorithm using OpenCV on Visual C++. So I turned to Windows to build a site where teachers can log in and do a roll call on the server with footages uploaded by a video camera in the classroom.
+Currently I am making an application that does roll call in a classroom for teachers who don't want to waste their time on a roll call. We need to invoke some Matlab-implemented algorithm using OpenCV on Visual C++. So I turned to Windows to build a site where teachers can log in and do a roll call on the server with footages uploaded by a video camera in the classroom.
 
 Considering executing C++ code would be an external process for Node. Node is designed to handle I/O efficiently with the help of its `child_process` module. You can actually use `exec()` and `spawn()` to control external processes and communicate with them.
 
@@ -19,7 +19,7 @@ exec()
 
 child_process.exec(command, [options], callback)
 
-{% highlight JavaScript linenos %}	
+{% highlight JavaScript %}	
 	normalizeExecArgs():
 
 	  if (process.platform === 'win32') {
@@ -51,7 +51,7 @@ You can check out what does `cmd /c` means by typing `cmd /?` in cmd:
 
 As for Linux, you can run the following:
 
-{% highlight bash linenos %}
+{% highlight bash %}
 $ ps
 $ /bin/sh -c ls
 $ ps
@@ -64,7 +64,7 @@ and see whether another process has showed up. Obviously no new process will sho
 spawn()
 =============================
 	
-{% highlight javascript linenos %}
+{% highlight javascript %}
 child_process.spawn(command, [args], [options])
 
 // the first argument **command** should be named **file** as this is a bit confusing in Node documentation.

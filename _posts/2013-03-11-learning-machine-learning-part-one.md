@@ -1,20 +1,18 @@
 ---
 layout: post
-title: "Learning Machine Learning - Part One"
-date: 2014-06-01 22:41:00
+title: "Introduction into Machine Learning"
+date: 2013-03-11 11:26:47
 categories: ml
 tags: linear-regression gradient-descent normal-equation
 ---
 
-Today, I will begin taking notes on the machine learning course taught on Coursera by Andrew Ng. This is part one, and only goes as far as 4th segment of all video lectures.
+<!-- Today, I will begin taking notes on the machine learning course taught on Coursera by Andrew Ng. This is part one, and only goes as far as 4th segment of all video lectures. -->
 
 # Introduction
 
 ### Machine Learning Definition
 
 Tom Mitchell once said:
-
-# is tom talking about supervised learning here?
 
 >   A computer program is said to learn
 >   from experience E with respect to some task T
