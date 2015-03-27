@@ -4,12 +4,13 @@ title: "Setting up Jekyll with GitHub"
 date: 2014-01-15 22:28:50
 category: blog
 tags: Jekyll GitHub git ruby rvm gem
+description: Github really helps us programmers share a lot of things.
 ---
 
 You can use GitHub to host your personal blog for you, and simply blog with Jekyll.
 
 What is Jekyll?
-=================
+----------------
 [Jekyll][jekyll] is "a simple, blog aware, static site generator". It is one site generator that you can build static websites using dynamic components. Such components include templates, partials, liquid code, markdown, etc. Aside all that Jekyll has brought us, its killer feature(at least that's what I think) is the ablity to be hosted freely on [GitHub Pages](http://pages.github.com).
 
 I'm not expert and only 3-days after learning something, so to take some notes, here I will go through some of the details of how I used *Jekyll*, *git* and *GitHub* to build this mini site.
@@ -46,6 +47,9 @@ rvm install 2.1.0
 rvm list 
 rvm use 2.1.0 --default
 {% endhighlight %}
+
+rvm error
+------------
 
 If it occurs an error saying "RVM is not a function", then you probably are not using a login shell.
 Solutions found in [here][rvmNotAFunction]

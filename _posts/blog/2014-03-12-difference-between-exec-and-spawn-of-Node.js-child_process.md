@@ -4,6 +4,7 @@ title: "Difference between exec() and spawn() of childprocess Node.js"
 date: 2014-03-12 22:34
 category: blog 
 tags: node child process exec spawn IO stdout stderr Windows cmd 
+description: Peek under the hood about how Node.js handles processes.
 ---
 
 Currently I am making an application that does roll call in a classroom for teachers who don't want to waste their time on a roll call. We need to invoke some Matlab-implemented algorithm using OpenCV on Visual C++. So I turned to Windows to build a site where teachers can log in and do a roll call on the server with footages uploaded by a video camera in the classroom.

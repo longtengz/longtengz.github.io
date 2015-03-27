@@ -4,6 +4,7 @@ title: "Introduction into Machine Learning"
 date: 2013-03-11 11:26:47
 category: blog
 tags: linear-regression gradient-descent normal-equation
+description: Course note
 ---
 
 <!-- Today, I will begin taking notes on the machine learning course taught on Coursera by Andrew Ng. This is part one, and only goes as far as 4th segment of all video lectures. -->
@@ -106,18 +107,18 @@ In machine learning, we want to find the optimized solution. In terms of optimiz
 
 The cost function for univariate linear regression is often defined as following:
 
-$$ J(\theta_0, \theta_1) = \frac{1}{2m}\sum\limits_{i=1}^m (h_\theta(x^i)-y^i)^2 $$
+$$ J(\theta_0, \theta_1) = \frac{1}{2m}\sum\limits_{i=1}^{m} (h_\theta(x^{i})-y^{i})^{2} $$
 
 \\( m \\) here denotes the number of data in a training set.
-\\( x^i \\) and \\( y^i \\) means input and output respectively.
+\\( x^{i} \\) and \\( y^{i} \\) means input and output respectively.
 
 The cost function above is called **squared-error loss function**. You should know it is only one implementation. And You can build whatever cost function of which minimization won't be expensive and it can help you efficiently improve the performance of hypothesis function when it's minimized.
 
 However, different cost functions will likely generate different hypothesis functions with different performances. Like we can find one hypothesis function by the biggest number of points sit right **on** the straight line instead of **near** it, so the cost function can be defined as below:
 
-$$ J(\theta_0, \theta_1) = \sum\limits_{i=1}^m e^i $$ 
+$$ J(\theta_0, \theta_1) = \sum\limits_{i=1}^{m} e^{i} $$
 
-$$ e^i = \begin{cases}1 & h_\theta(x^i)-y^i\neq0 \\ 0 & h_\theta(x^i)-y^i=0\end{cases} $$
+$$ e^{i} = \begin{cases}1 & h_\theta(x^{i}) - y^{i} \neq 0 \\\\ 0 & h_\theta(x^{i}) - y^{i} = 0 \end{cases} $$
 
 When we minimize it, we are finding one straight line with the most points of data (in the training set) on it. But consider the situation (when training set is not large) where only 2 points can be found on the hypothesis straight line, no matter how we draw this line, we cannot find the minimal since each the cost function is always equal to 2. Therefore we can not determine the hypothesis function.
 

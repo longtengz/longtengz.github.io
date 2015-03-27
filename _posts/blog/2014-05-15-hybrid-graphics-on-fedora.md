@@ -4,6 +4,7 @@ title: "Disable discrete VGA on Fedora 20 while radeon and fglrx are both not wo
 date: 2014-05-15 21:56:40
 category: blog 
 tags: hardware VGA
+description: There is really a lot going on in the open source world, I just didn't know about them yet. 
 ---
 
 I just migrated to Fedora 20 only out of pure love for its slick UI. When I first installed Fedora 15, I had this annoying VGA cooler that spinned like crazy and consumed a great portion of power that drained my battery pretty fast. I have a Dell, and it has dual graphics cards, one discrete and the other integrated. After a bit of search, I think I solved the problem by installing the **propriety** AMD Catalyst Driver **fglrx** and succeeded using the hybrid graphics cards alternatively. 
