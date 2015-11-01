@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="./theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="./theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="./theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Teng Long">
+  <meta name="description" content="Posts and writings by Teng Long">
+
+
+<meta name="keywords" content="C">
+
+  <title>
+    Teng Long's Homepage
+&ndash; Why bother to have type definitions if we already have macros?  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href=".">
+        <img src="./theme/images/logo.png" alt="logo">
+      </a>
+      <h2><a href=".">Teng Long</a></h2>
+      <p></p>
+      <ul>
+        <li><a href="http://ilab.rutgers.edu/~tl505/about.html" target="_blank">About</a></li>
+        <li><a href="http://ilab.rutgers.edu/~tl505" target="_blank">Notes</a></li>
+        <li><a href="http://ilab.rutgers.edu/~tl505" target="_blank">Projects</a></li>
+        <li><a href="http://ilab.rutgers.edu/~tl505" target="_blank">Resume</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href=".">Index</a> &brvbar; <a href="./archives.html">Archives</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h3><a href="./why-bother-to-have-type-definitions-if-we-already-have-macros.html">Why bother to have type definitions if we already have macros?</a></h3>
+  </div>
+  <div class="article_text">
+    <h4>Macro Definitions</h4>
+<p><strong>Macro definitions</strong> are recognized during preprocessing phase, and macro names are naively replaced by the preprocessor.</p>
+<p>Consider following example:</p>
+<div class="highlight"><pre><span class="cp">#define Int_Ptr (int *)</span>
+
+<span class="n">Int_Ptr</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
+</pre></div>
+
+
+<p>In the above case, only <code>a</code> will be defined as a pointer pointed to and Integer, whereas <code>b</code> and <code>c</code> are two Integers.</p>
+<p>Preprocessor just replace macro names as it sees them, so after preprocessing the above code becomes:</p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Similar to pointers, array types can't be defined as macros either.</p>
+<h4>Type Definitions</h4>
+<p><strong>Type definitions</strong> are not preprocessed directives but compiled statements. They literally define a new type. So it can define new pointer and array types which macro definitions cannot.</p>
+<div class="highlight"><pre><span class="k">typedef</span> <span class="kt">int</span><span class="o">*</span> <span class="n">Int_ptr</span><span class="p">;</span>
+
+<span class="n">Int_Ptr</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="kt">char</span> <span class="n">Char_Arr</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+
+<span class="n">Char_Arr</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+</pre></div>
+
+
+<p>The above code will give us 3 Integer pointers and 2 arrays of 10 characters.</p>
+<p>One of the biggest differences is that type definitions are subject to the same scope rules are variables, that is a <code>typedef</code> defined typed in a function body will not be recognized outside that function. However, macro names will be replaced everywhere in the source file as long as the preprocessor finds a macro.</p>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Sun 01 November 2015</p>
+    <p>Category: <a href="./category/programming-languages.html">Programming Languages</a>
+ &ndash; Tags:
+      <a href="./tag/c.html">C</a>    </p>
+  </div>
+
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Teng Long. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>
