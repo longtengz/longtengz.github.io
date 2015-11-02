@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="./theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="./theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="./theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Teng Long">
+  <meta name="description" content="Posts and writings by Teng Long">
+
+
+<meta name="keywords" content="nodejs, process, OS">
+
+  <title>
+    Teng Long's Homepage
+&ndash; Difference Between exec() And spawn() In Node.js  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href=".">
+        <img src="./theme/images/logo.png" alt="logo">
+      </a>
+      <h2><a href=".">Teng Long</a></h2>
+      <p></p>
+      <ul>
+        <li><a href="http://longtengz.github.io/about.html" target="_blank">About</a></li>
+        <li><a href="http://longtengz.github.io" target="_blank">Notes</a></li>
+        <li><a href="http://longtengz.github.io" target="_blank">Projects</a></li>
+        <li><a href="http://longtengz.github.io" target="_blank">Resume</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href=".">Index</a> &brvbar; <a href="./archives.html">Archives</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h3><a href="./difference-between-exec-and-spawn-in-nodejs.html">Difference Between exec() And spawn() In Node.js</a></h3>
+  </div>
+  <div class="article_text">
+    <p><em>This thread might be outdated since I was using Node.js 0.10.26.</em></p>
+<p>Currently I am making an application that does roll call in a classroom for teachers who don't want to waste their time on a roll call. We need to invoke some Matlab-implemented algorithm using OpenCV on Visual C++. So I turned to Windows to build a site where teachers can log in and do a roll call on the server with footages uploaded by a video camera in the classroom.</p>
+<p>Considering executing C++ code would be an external process for Node. Node is designed to handle I/O efficiently with the help of its <code>child_process</code> module. You can actually use <code>exec()</code> and <code>spawn()</code> to control external processes and communicate with them.</p>
+<p>On Linux, I am not aware of any command that both the above methods apply differently. Then why bother create two separate functions? Because they are for different needs. There are commands that result with a lot of data, if you use <code>exec()</code> to run these, it will consume a lot of memory because the child process's output is <strong>buffered</strong>, plus it has a <code>maxBuffer</code> default option that only allows for 200k data buffered though this default option can be changed. Unlike <code>exec()</code>, <code>spawn()</code> uses <strong>streams</strong> both input(stdin) and output(stdout, stderr), so it's there for a huge amount of data.</p>
+<p>But on Windows their differences not only lie in buffer or stream, but also in what type of commands they are about to execute in a child process. So let's take a look at <code>child_process.js</code> to find out how they are implemented:</p>
+<h1>exec()</h1>
+<div class="highlight"><pre><span class="c1">// in child_process.exec(command, [options], callback)</span>
+<span class="c1">// in normalizeExecArgs():</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">&#39;win32&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">file</span> <span class="o">=</span> <span class="s1">&#39;cmd.exe&#39;</span><span class="p">;</span>
+    <span class="nx">args</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/s&#39;</span><span class="p">,</span> <span class="s1">&#39;/c&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="nx">command</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">];</span>
+
+    <span class="c1">// Make a shallow copy before patching so we don&#39;t clobber the user&#39;s</span>
+    <span class="c1">// options object.</span>
+
+    <span class="nx">options</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">_extend</span><span class="p">({},</span> <span class="nx">options</span><span class="p">);</span>
+    <span class="nx">options</span><span class="p">.</span><span class="nx">windowsVerbatimArguments</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">file</span> <span class="o">=</span> <span class="s1">&#39;/bin/sh&#39;</span><span class="p">;</span>
+    <span class="nx">args</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="nx">command</span><span class="p">];</span>
+<span class="p">}</span>
+
+
+<span class="c1">// in child_process.execFile()</span>
+
+<span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">spawn</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">cwd</span><span class="o">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">cwd</span><span class="p">,</span>
+    <span class="nx">env</span><span class="o">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">env</span><span class="p">,</span>
+    <span class="nx">windowsVerbatimArguments</span><span class="o">:</span> <span class="o">!!</span><span class="nx">options</span><span class="p">.</span><span class="nx">windowsVerbatimArguments</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>After seeing this code it's quite clear why this method is named <strong>exec</strong>, it pays more attention on how to run a command on a child process. So it specifies <code>cmd.exe</code> or <code>/bin/sh</code> for either Windows or Linux to excute a command using these two command.(It might sound confusing). But take a look at the man page for <code>cmd.exe</code> or <code>sh</code>, with options specified by the code above, they only execute the command and terminates.</p>
+<p>You can check out what does <code>cmd /c</code> means by typing <code>cmd /?</code> in cmd:</p>
+<blockquote>
+<p>/C      Carries out the command specified by string and then terminates</p>
+</blockquote>
+<p>As for Linux, you can run the following:</p>
+<div class="highlight"><pre><span class="nv">$ </span>ps
+<span class="nv">$ </span>/bin/sh -c ls
+<span class="nv">$ </span>ps
+</pre></div>
+
+
+<p>and see whether another process has showed up. Obviously no new process will show up, because when <code>sh -c ls</code> finished executing <code>ls</code>,it stops and terminates.</p>
+<h1>spawn()</h1>
+<div class="highlight"><pre><span class="nx">child_process</span><span class="p">.</span><span class="nx">spawn</span><span class="p">(</span><span class="nx">command</span><span class="p">,</span> <span class="p">[</span><span class="nx">args</span><span class="p">],</span> <span class="p">[</span><span class="nx">options</span><span class="p">])</span>
+    <span class="c1">// spawn method signature</span>
+    <span class="c1">// the first argument **command** should be named **file** as this is a bit confusing in Node documentation.</span>
+
+<span class="nx">normalizeSpawnArguments</span><span class="p">(</span><span class="cm">/*file, args, options*/</span><span class="p">)</span><span class="o">:</span>
+    <span class="c1">// when this normalized arguments child_process.spawn() takes in, </span>
+    <span class="c1">// the *file* argument is never normalized</span>
+    <span class="c1">// and the *file* is not normalized as that in the arguemnts of exec()</span>
+</pre></div>
+
+
+<p>So it's quite clear now, the so-called <strong>command</strong> argument isn't exactly command but rather a file name that will be excuted alone as a child process. <code>cmd.exe</code> or <code>/bin/sh</code> is just one of many child processes that can be executed.</p>
+<p>Be aware that on <strong>Windows</strong>, some command isn't exactly considered as a process but a built-in command in <strong>cmd</strong>, such as <code>dir</code>. On the other hand, there are some executable files considered as a process that come with an extension '.cmd', '.exe' or '.bat', then you can't just call them without extension when using <strong>spawn()</strong>, becuase <strong>spawn()</strong> expects a file name.</p>
+<p>So in a nut shell, you use <code>spawn()</code> whenever you want to outsource something in a child process, you use <code>exec()</code> whenever you only want to execute a command and don't want another subshell.</p>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Wed 12 March 2014</p>
+    <p>Category: <a href="./category/programming-languages.html">Programming Languages</a>
+ &ndash; Tags:
+      <a href="./tag/nodejs.html">nodejs</a>,      <a href="./tag/process.html">process</a>,      <a href="./tag/os.html">OS</a>    </p>
+  </div>
+
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Teng Long. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>
