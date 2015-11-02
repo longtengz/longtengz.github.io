@@ -16,10 +16,11 @@
   <meta name="description" content="Posts and writings by Teng Long">
 
 
+<meta name="keywords" content="C">
 
   <title>
     Teng Long's Homepage
-  </title>
+&ndash; Why bother to have type definitions if we already have macros?  </title>
 
 </head>
 
@@ -61,15 +62,38 @@
 </pre></div>
 
 
-<p>In the above case, only <code>a</code> will be defined as a pointer pointed to and Integer, whereas <code>b</code> and <code>c</code> are two ...</p>
+<p>In the above case, only <code>a</code> will be defined as a pointer pointed to and Integer, whereas <code>b</code> and <code>c</code> are two Integers.</p>
+<p>Preprocessor just replace macro names as it sees them, so after preprocessing the above code becomes:</p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Similar to pointers, array types can't be defined as macros either.</p>
+<h4>Type Definitions</h4>
+<p><strong>Type definitions</strong> are not preprocessed directives but compiled statements. They literally define a new type. So it can define new pointer and array types which macro definitions cannot.</p>
+<div class="highlight"><pre><span class="k">typedef</span> <span class="kt">int</span><span class="o">*</span> <span class="n">Int_ptr</span><span class="p">;</span>
+
+<span class="n">Int_Ptr</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="kt">char</span> <span class="n">Char_Arr</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+
+<span class="n">Char_Arr</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+</pre></div>
+
+
+<p>The above code will give us 3 Integer pointers and 2 arrays of 10 characters.</p>
+<p>One of the biggest differences is that type definitions are subject to the same scope rules are variables, that is a <code>typedef</code> defined typed in a function body will not be recognized outside that function. However, macro names will be replaced everywhere in the source file as long as the preprocessor finds a macro.</p>
   </div>
+  <div class="article_meta">
+    <p>Posted on: Sun 01 November 2015</p>
+    <p>Category: <a href="./category/programming-languages.html">Programming Languages</a>
+ &ndash; Tags:
+      <a href="./tag/c.html">C</a>    </p>
+  </div>
+
+
 </article>
 
-<footer>
-<div id="paginator">
-
-</div>
-</footer>
 
     <div id="ending_message">
       <p>&copy; Teng Long. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
