@@ -1,29 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-        <title>Teng Long's Homepage</title>
-        <meta charset="utf-8" />
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="./theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="./theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="./theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Teng Long">
+  <meta name="description" content="Posts and writings by Teng Long">
+
+
+
+  <title>
+    Teng Long's Homepage
+  </title>
+
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="./">Teng Long's Homepage <strong></strong></a></h1>
-        </header><!-- /#banner -->
-        <nav id="menu"><ul>
-        </ul></nav><!-- /#menu -->
-<section id="content">
-<h2>All articles</h2>
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href=".">
+        <img src="./theme/images/logo.png" alt="logo">
+      </a>
+      <h2><a href=".">Teng Long</a></h2>
+      <p></p>
+      <ul>
+        <li><a href="http://ilab.rutgers.edu/~tl505/about.html" target="_blank">About</a></li>
+        <li><a href="http://ilab.rutgers.edu/~tl505" target="_blank">Notes</a></li>
+        <li><a href="http://ilab.rutgers.edu/~tl505" target="_blank">Projects</a></li>
+        <li><a href="http://ilab.rutgers.edu/~tl505" target="_blank">Resume</a></li>
+      </ul>
+    </div>
+  </aside>
 
-<ol id="post-list">
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="./why-bother-to-have-type-definitions-if-we-already-have-macros.html" rel="bookmark" title="Permalink to Why bother to have type definitions if we already have macros?">Why bother to have type definitions if we already have macros?</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2015-11-01T15:49:00-05:00"> Sun 01 November 2015 </abbr>
-                    <address class="vcard author">By
-                        <a class="url fn" href="./author/teng-long.html">Teng Long</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <h4>Macro Definitions</h4>
+  <main>
+    <header>
+      <p>
+      <a href=".">Index</a> &brvbar; <a href="./archives.html">Archives</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h3><a href="./why-bother-to-have-type-definitions-if-we-already-have-macros.html">Why bother to have type definitions if we already have macros?</a></h3>
+  </div>
+  <div class="article_text">
+    <h4>Macro Definitions</h4>
 <p><strong>Macro definitions</strong> are recognized during preprocessing phase, and macro names are naively replaced by the preprocessor.</p>
 <p>Consider following example:</p>
 <div class="highlight"><pre><span class="cp">#define Int_Ptr (int *)</span>
@@ -32,15 +61,19 @@
 </pre></div>
 
 
-<p>In the above case, only <code>a</code> will be defined as a pointer pointed to and Integer, whereas <code>b</code> and <code>c</code> are two ...</p> </div><!-- /.entry-content -->
-        </article></li>
-</ol><!-- /#posts-list -->
-</section><!-- /#content -->
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
+<p>In the above case, only <code>a</code> will be defined as a pointer pointed to and Integer, whereas <code>b</code> and <code>c</code> are two ...</p>
+  </div>
+</article>
+
+<footer>
+<div id="paginator">
+
+</div>
+</footer>
+
+    <div id="ending_message">
+      <p>&copy; Teng Long. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
 </body>
 </html>
