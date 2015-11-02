@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Teng Long'
 SITENAME = u"Teng Long's Homepage"
-SITEURL = 'longtengz.github.io'
+SITEURL = 'http://longtengz.github.io'
 
 RELATIVE_URLS = True
 
@@ -24,10 +24,10 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (('About', 'longtengz.github.io/about.html'),
-         ('Notes', 'longtengz.github.io'),
-         ('Projects', 'longtengz.github.io'),
-         ('Resume', 'longtengz.github.io'),)
+LINKS = (('About', 'http://longtengz.github.io/about.html'),
+        ('Notes', 'http://longtengz.github.io'),
+        ('Projects', 'http://longtengz.github.io'),
+        ('Resume', 'http://longtengz.github.io'),)
 
 # Social widget
 #  SOCIAL = (('You can add links in your config file', '#'),
