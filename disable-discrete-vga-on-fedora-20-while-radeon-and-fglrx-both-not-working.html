@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="./theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="./theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="./theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Teng Long">
+  <meta name="description" content="Posts and writings by Teng Long">
+
+
+<meta name="keywords" content="Hardware, VGA">
+
+  <title>
+    Teng Long's Homepage
+&ndash; Disable Discrete VGA On Fedora 20 While radeon And fglrx Both Not Working  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href=".">
+        <img src="./theme/images/logo.png" alt="logo">
+      </a>
+      <h2><a href=".">Teng Long</a></h2>
+      <p></p>
+      <ul>
+        <li><a href="http://longtengz.github.io/about.html" target="_blank">About</a></li>
+        <li><a href="http://longtengz.github.io" target="_blank">Notes</a></li>
+        <li><a href="http://longtengz.github.io" target="_blank">Projects</a></li>
+        <li><a href="http://longtengz.github.io" target="_blank">Resume</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href=".">Index</a> &brvbar; <a href="./archives.html">Archives</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h3><a href="./disable-discrete-vga-on-fedora-20-while-radeon-and-fglrx-both-not-working.html">Disable Discrete VGA On Fedora 20 While radeon And fglrx Both Not Working</a></h3>
+  </div>
+  <div class="article_text">
+    <p>I just migrated to Fedora 20 only out of pure love for its slick UI. When I first installed Fedora 15, I had this annoying VGA cooler that spinned like crazy and consumed a great portion of power that drained my battery pretty fast. I have a Dell, and it has dual graphics cards, one discrete and the other integrated. After a bit of search, I think I solved the problem by installing the <strong>propriety</strong> AMD Catalyst Driver <strong>fglrx</strong> and succeeded using the hybrid graphics cards alternatively. </p>
+<p>But this time, Fedora 20 is quite new, and the latest propriety driver is not up to date with the new linux kernels. There are compatibility issues around that I cannot address. But Fedora 20 does ship with the <a href="http://www.x.org/wiki/RadeonFeature/"><strong>open</strong> source radeon drivers</a>. These drivers are written mostly by the community based on specs published by AMD.</p>
+<p>You can use the following command to check whether the Fedora installation has detected your discrete VGA card and installed the <strong>radeon</strong> for you automatically.</p>
+<div class="highlight"><pre><span class="nv">$ </span>lsmod <span class="p">|</span> grep radeon
+    <span class="c"># lsmod - Show the status of modules in Linux Kernel</span>
+</pre></div>
+
+
+<p>By checking the PCI devices that are currently connected,</p>
+<div class="highlight"><pre>    <span class="c"># list all PCI devices</span>
+<span class="nv">$ </span>lspci -v <span class="p">|</span> less
+    <span class="c"># search &#39;/VGA&#39;</span>
+    <span class="c"># or less verbose</span>
+<span class="nv">$lspci</span> <span class="p">|</span> grep -i VGA
+</pre></div>
+
+
+<p>I see two graphics cards turned on, but only the integrated one with the tag <code>[VGA controller]</code> which indicates it currently controls how my computer displays on screen. However the radeon open-source driver doesn't seem to work event it's now turned on. As I don't need two cards, and I don't need extremely fancy graphics, so the integrated Intel graphics card should work for me. And so I opt to turn off the discrete AMD card.</p>
+<p>I found a solution on <a href="https://wiki.archlinux.org/index.php/hybrid_graphics">wiki archlinux</a>, and it elaborates quite well on related topics:</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">echo </span>OFF &gt; /sys/kernel/debug/vgaswitcheroo/switch
+    <span class="c"># turns off the discrete GPU</span>
+</pre></div>
+
+
+<p>Note the <strong>Current Problems</strong> section on the page very well clarifies the issues about intel+ati cards on Linux:</p>
+<blockquote>
+<p>The Dynamic Switch needs Xorg support for the discrete videocard assigned for rendering to work [1]. So, rendering on the discrete gpu will not work until the Xorg team adds support for it.</p>
+<p>This means that with a muxless intel+ati design, you cannot use your discrete card by simply modprobing ( <code>modprobe</code>- Add and remove modules from the Linux Kernel ) the radeon module.</p>
+</blockquote>
+<p>I added the above script in <code>/etc/rc.d/rc.local</code> to turn off the discrete AMD card on <strong>startup</strong>.</p>
+<p>Though I don't quite how the whole thing actually work, but at least I made my VGA cooler shut up when it's not supposed to talk much. And battery life does improve as opposed to that of Fedora 15 I was running with hybrid cards.</p>
+<p>p.s. There is a <a href="http://wiki.cchtml.com/index.php/Main_Page">site</a> providing document tips, tricks and problems related to AMD's proprietary Linux driver (a.k.a. fglrx) which might be helpful if you are not using the newest Linux distros.</p>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Thu 15 May 2014</p>
+    <p>Category: <a href="./category/workarounds.html">Workarounds</a>
+ &ndash; Tags:
+      <a href="./tag/hardware.html">Hardware</a>,      <a href="./tag/vga.html">VGA</a>    </p>
+  </div>
+
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Teng Long. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>
