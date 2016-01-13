@@ -22,12 +22,6 @@ DEFAULT_LANG = u'en'
 GITHUB_URL = "https://github.com/longtengz"
 
 
-# Google analytics
-
-GOOGLE_ANALYTICS = "UA-40460783-2"
-
-
-
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
