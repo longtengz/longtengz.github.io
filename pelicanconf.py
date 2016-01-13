@@ -19,7 +19,10 @@ DEFAULT_LANG = u'en'
 
 # Personal Info 
 
-GITHUB_URL = "https://github.com/longtengz"
+GITHUB_URL = 'https://github.com/longtengz'
+
+# Google analytics
+GOOGLE_ANALYTICS = u'UA-40460783-2'
 
 
 # Feed generation is usually not desired when developing
