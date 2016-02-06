@@ -34,9 +34,8 @@ AUTHOR_FEED_RSS = None
 
 # Blogroll
 LINKS = (('About', 'http://longtengz.github.io/about.html'),
-        ('Notes', 'http://longtengz.github.io'),
-        ('Projects', 'http://longtengz.github.io'),
-        ('Resume', 'http://longtengz.github.io'),)
+        ('Github', 'https://github.com/longtengz'),
+         ('Resume', 'http://ilab.rutgers.edu/~tl505/resume.pdf'),)
 
 # Social widget
 #  SOCIAL = (('You can add links in your config file', '#'),
