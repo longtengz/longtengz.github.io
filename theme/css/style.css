@@ -25,7 +25,16 @@ img {
 aside div#user_meta {
   padding: 40px;
   text-align: center;
+  background: black;
+  height: 100%;
+  max-height: 100%;
 }
+
+#author_name {
+  color: #fff;
+  font-size: 24px;
+}
+
 aside div#user_meta h2 {
   margin: 15px 0 5px 0;
 }
@@ -34,7 +43,7 @@ aside div#user_meta p {
   font-size: 14px;
 }
 aside div#user_meta ul {
-  margin: 40px 0 0 0;
+  margin: 30px 0 0 0;
   padding-left: 0;
   font-size: 16px;
   list-style-type: none;
@@ -45,11 +54,7 @@ aside div#user_meta ul li {
 }
 aside div#user_meta ul li a {
   padding: 5px 15px 5px 15px;
-  border: 3px solid #eeeeee;
-  border-radius: 15px;
-  -moz-border-radius: 15px;
-  -webkit-border-radius: 15px;
-  color: #999999;
+  color: #fff;
 }
 main header {
   padding: 40px;
@@ -62,8 +67,15 @@ main header p {
   text-transform: uppercase;
 }
 main article {
-  max-width: 640px;
-  padding: 40px;
+  // max-width: 640px;
+  padding: 10px 40px 40px 40px;
+}
+main article div.article_title h3 {
+    padding: 8px;
+    background: #000;
+}
+main article div.article_title a {
+    color: #fff;
 }
 main article div.article_text {
   line-height: 1.375em;
@@ -109,21 +121,21 @@ main footer {
 }
 main footer a.button_accent {
   padding: 10px;
-  border: 2px solid #0e94ec;
+  border: 2px solid #000;
   border-radius: 20px;
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
   text-transform: uppercase;
-  color: #0e94ec;
+  color: #000;
   font-size: 18px;
 }
 main footer a.button_accent:hover {
   color: #ffffff;
-  background-color: #0e94ec;
+  background-color: #000;
 }
 main footer a.button_accent:active {
   color: #ffffff;
-  background-color: #0e94ec;
+  background-color: #000;
 }
 main div#ending_message {
   border-top: #eeeeee 1px solid;
@@ -133,7 +145,7 @@ main div#ending_message {
 }
 @media screen and (min-width: 1024px) {
   aside {
-    width: 25%;
+    width: 202px;
     height: 100%;
     position: fixed;
     top: 0;
@@ -144,7 +156,7 @@ main div#ending_message {
     margin: 10px 0 0 0;
   }
   aside div#user_meta {
-    max-width: 192px;
+    max-width: 122px;
     text-align: right;
   }
   aside div#user_meta ul li {
@@ -154,12 +166,12 @@ main div#ending_message {
     width: 75%;
     position: absolute;
     top: 0;
-    left: 25%;
+    left: 230px;
     overflow-x: hidden;
     overflow-y: hidden;
   }
   main article {
-    max-width: 640px;
+    // max-width: 640px;
   }
   main header {
     border-top: 0;
